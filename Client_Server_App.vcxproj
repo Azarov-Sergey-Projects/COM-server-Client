@@ -89,11 +89,18 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalModuleDependencies>Server.lib</AdditionalModuleDependencies>
+      <AdditionalIncludeDirectories>D:\Labs_NIX\Client_Server_App\src;D:\Labs_NIX\Server\build\Debug;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Server.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Labs_NIX\Client_Server_App;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -141,16 +148,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Client.cpp" />
-    <ClCompile Include="src\CSystemInfo.cpp" />
-    <ClCompile Include="src\CSystemInfoFactory.cpp" />
-    <ClCompile Include="src\Register.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\CSystemInfo.h" />
-    <ClInclude Include="src\CSystemInfoFactory.h" />
-    <ClInclude Include="src\framework.h" />
-    <ClInclude Include="src\ISystemInfo.h" />
-    <ClInclude Include="src\Register.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
