@@ -8,9 +8,16 @@
 int main()
 {
     HRESULT hr;
-    CoInitialize( NULL );
+    CString InfoAboutSystem;
     CSystemInfo* cSystem = NULL;
+    int MonitorCount;
     CLSID clsid;
+    hr=CoInitialize( NULL );
+    if( FAILED( hr ) )
+    {
+        std::cout << "Cant CoInitialize() " << std::endl;
+    }
+    
     hr = CLSIDFromProgID( L"Server.Inproc.1" , &clsid );
     if( FAILED( hr ) )
     {
@@ -21,22 +28,20 @@ int main()
     {
         std::cout << "Cant Create Instance" << std::endl;
     }
-    CString tmp;
-    hr = cSystem->GetOS( &tmp );
-    std::wcout << "OS Info: \t" ;
-    std::wcout << tmp.GetString() << std::endl;
-    tmp.Delete( 0, tmp.GetLength() );
-    std::wcout << "Motherboard info: \t";
-    hr = cSystem->GetMBoardCreator( &tmp );
-    std::wcout << tmp.GetString() << std::endl;
-    tmp.Delete( 0, tmp.GetLength() );
-    std::wcout << "Monitor Info: \t";
-    hr = cSystem->MonitorInfo( &tmp );
-    std::wcout << tmp.GetString() << std::endl;
+   
+    hr = cSystem->GetOS( &InfoAboutSystem );
+    std::wcout << "OS Version: \t" ;
+    std::wcout << InfoAboutSystem.GetString() << std::endl;
+    InfoAboutSystem.Delete( 0, InfoAboutSystem.GetLength() );
+    std::wcout << "Motherboard creator: \t";
+    hr = cSystem->GetMBoardCreator( &InfoAboutSystem );
+    std::wcout << InfoAboutSystem.GetString() << std::endl;
+    InfoAboutSystem.Delete( 0, InfoAboutSystem.GetLength() );
+    hr = cSystem->MonitorInfo( &InfoAboutSystem,&MonitorCount );
+    std::wcout << "Monitor count: " << MonitorCount << std::endl << "Monitor name: " << InfoAboutSystem.GetString() << std::endl;
     uint32_t clocks;
     uint32_t frequency;
     hr = cSystem->GetCPUINFO( &clocks,&frequency );
-    std::wcout << "CPU info " << std::endl;
     std::wcout <<"Clocks:\t"<< clocks<<"\t"<<"Max frequency of clocks in MHz:\t"<<frequency << std::endl;
     CoUninitialize();
     return 0;
