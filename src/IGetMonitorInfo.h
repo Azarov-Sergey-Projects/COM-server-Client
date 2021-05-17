@@ -4,6 +4,5 @@
 class IMonitorInfo: public IUnknown
 {
 public:
-    STDMETHOD( MonitorInfo(CString*,int * ) )PURE;
-    STDMETHODIMP GetCountOfMonitors( int* info );
+    STDMETHOD( MonitorInfo(CString*,int *,std::vector<uint32_t>*,std::vector<uint32_t>* ) )PURE;
 };
