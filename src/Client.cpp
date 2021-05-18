@@ -43,7 +43,7 @@ int main()
     InfoAboutSystem.Delete( 0, InfoAboutSystem.GetLength() );
     hr = cSystem->MonitorInfo( &InfoAboutSystem, &MonitorCount, ResolutionX, ResolutionY );
 
-    std::wcout << "monitor count with virtual: " << MonitorCount << std::endl << "Monitor name: " << InfoAboutSystem.GetString() << std::endl;
+    std::wcout << "monitor count\t " << MonitorCount << std::endl << "Monitor name: " << InfoAboutSystem.GetString() << std::endl;
     for( int i = 0; i <ResolutionX->size(); i++ )
     {
         std::cout << "For monitor " << i << "\tResolution is " << ResolutionX->at(i) << "\tOn\t" << ResolutionY->at(i) << std::endl;
@@ -52,6 +52,10 @@ int main()
     uint32_t frequency;
     hr = cSystem->GetCPUINFO( &clocks,&frequency );
     std::wcout <<"Clocks:\t"<< clocks<<"\t"<<"Max frequency of clocks in MHz:\t"<<frequency << std::endl;
+    ResolutionX->clear();
+    ResolutionY->clear();
+    delete ResolutionX;
+    delete ResolutionY;
     CoUninitialize();
     return 0;
 }
